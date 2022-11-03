@@ -1,8 +1,8 @@
 #define B1 39
 #define B2 35
-#define LEDAM 17 
-#define LEDAZ 3
-#define LEDVERMELHO 10
+#define LEDAM 15 
+#define LEDAZ 18
+#define LEDVERMELHO 9
 #define LEDVERDE 12
 #define LDR 2
 #define BUZZ 1
