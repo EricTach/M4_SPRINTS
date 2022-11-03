@@ -1,11 +1,11 @@
-#define B1 39
-#define B2 35
+#define B1 37
+#define B2 45
 #define LEDAM 15 
 #define LEDAZ 18
 #define LEDVERMELHO 9
 #define LEDVERDE 12
-#define LDR 2
-#define BUZZ 1
+#define LDR 1
+#define BUZZ 2
 
 int salvo = 0;
 int nota = 0;
@@ -27,14 +27,14 @@ void setup() {
   pinMode(B1, INPUT_PULLUP);
   pinMode(B2, INPUT_PULLUP);
 }
-void seq(int numero) {
+void seq(int num) {
   
-  digitalWrite(LEDAM, numero & 0b0001);
-  digitalWrite(LEDAZ, numero & 0b0010);
-  digitalWrite(LEDVERMELHO, numero & 0b0100);
-  digitalWrite(LEDVERDE, numero & 0b1000);
+  digitalWrite(LEDAM, num & 0b0001);
+  digitalWrite(LEDAZ, num & 0b0010);
+  digitalWrite(LEDVERMELHO, num & 0b0100);
+  digitalWrite(LEDVERDE, num & 0b1000);
   
-  tone(BUZZ, freq[numero], 500);
+  tone(BUZZ, freq[num], 500);
   
   delay(500);
 }
@@ -42,21 +42,19 @@ void seq(int numero) {
 
 void loop() {
 
-  int leit = analogRead(LDR);
-  int esc = map(leit, 32, 4063, 0, 15); 
-  Serial.println(esc);
+  int read = analogRead(LDR);
+  int select = map(read, 32, 4063, 0, 15); 
 
-  if (salvo != esc){
-    seq(esc);
-    salvo = esc;
-    nota = esc;
+  if (salvo != select){
+    seq(select);
+    salvo = select;
+    nota = select;
   }
   
   if (digitalRead(B1) == LOW) {
     cho[nsalva] = nota;
     nsalva++;
-    Serial.println("escolhida: ");
-    Serial.println(cho[nsalva]);
+
   }
 
   if (digitalRead(B2) == LOW) {
