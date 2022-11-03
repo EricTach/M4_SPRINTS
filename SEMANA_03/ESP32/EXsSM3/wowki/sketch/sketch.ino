@@ -28,27 +28,32 @@ void seq(int numero) {
   digitalWrite(LEDAZ, numero & 0b0010);
   digitalWrite(LEDVERMELHO, numero & 0b0100);
   digitalWrite(LEDVERDE, numero & 0b1000);
+  
   tone(BUZZ, freq[numero], 500);
+  
   delay(500);
 }
 
 
 void loop() {
-  int leitura = analogRead(LDR);
-  int escala = map(leitura, 32, 4063, 0, 15); 
-  Serial.println(escala);
 
-  if (salvo != escala){
-    seq(escala);
-    salvo = escala;
-    nota = escala;
+  int leit = analogRead(LDR);
+  int esc = map(leit, 32, 4063, 0, 15); 
+  Serial.println(esc);
+
+  if (salvo != esc){
+    seq(esc);
+    salvo = esc;
+    nota = esc;
   }
+  
   if (digitalRead(B1) == LOW) {
     cho[nsalva] = nota;
     nsalva++;
     Serial.println("escolhida: ");
     Serial.println(cho[nsalva]);
   }
+
   if (digitalRead(B2) == LOW) {
     for (int i =0; i <= nsalva; i++){
       seq(cho[i]);
@@ -56,7 +61,6 @@ void loop() {
     cho[50] = {};
     nsalva = 0;    
   }
+  
   delay(300);
 }
-
-
