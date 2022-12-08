@@ -1,7 +1,7 @@
 #include <WiFi.h>
 
-const char* ssid     = "FITOSP";
-const char* password = "tata1312";
+const char* ssid     = "insira a wifi";
+const char* password = "insira a senha";
 
 WiFiServer server(80);
 
